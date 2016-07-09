@@ -14,7 +14,7 @@ class Database
 
     private $dbPass = 'Ed(}dB@P%e$vsj)KaM*_nW{8jG!TH>pTE:.sf#N8zuGB<aYQ_9';
 
-    private $dbName = 'dev_dev';
+    private $dbName = 'dev';
 
     protected $db;
 
