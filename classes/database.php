@@ -38,6 +38,7 @@ class Database
     {
         $this->connect();
         if ($this->db->connect_error) {
+            echo $this->db->connect_error;
             die('Error Connecting to Database');
         }
     }
