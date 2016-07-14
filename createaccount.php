@@ -11,9 +11,10 @@ spl_autoload_register();
 
 $database = new Database();
 $createAccount = new CreateAccount($database);
-$username = new Username($database, $_POST['username']);
-$password = new Password($user_password, $user_password_confirm);
-$email = new EmailAddress($email_address);
+$account = new Account($database);
+$username = new Username($account, $_POST['username']);
+$password = new Password($_POST['user_password'], $_POST['user_password_confirm']);
+$email = new EmailAddress($account, $_POST['email_address']);
 
 
 
