@@ -15,7 +15,6 @@ class Password
 
     public function __construct($userPassword, $userPasswordConfirm)
     {
-        $this->database = $database;
         $this->userPassword = $userPassword;
         $this->userPasswordConfirm = $userPasswordConfirm;
     }
@@ -36,11 +35,12 @@ class Password
 
     protected function isMatching()
     {
-        if ($this->userPassword === $this->userPasswordConfirm) {
+        return ($this->userPassword === $this->userPasswordConfirm);
+        /**if ($this->userPassword === $this->userPasswordConfirm) {
             return true;
         } else {
             return false;
-        }
+        }**/
     }
 
 
