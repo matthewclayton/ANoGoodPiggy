@@ -16,7 +16,7 @@ class CsrfToken extends Session
         $this->token = bin2hex(mcrypt_create_iv(32, MCRYPT_DEV_URANDOM));
     }
 
-    protected function getToken()
+    public function getToken()
     {
         return $this->token;
     }
