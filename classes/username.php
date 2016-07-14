@@ -11,24 +11,29 @@
  * Turn on/off alpha/numeric only (e.g. allow certain symbols)
  */
 
-class Usernames
+class Username extends Account
 {
 
-    protected $database;
+   //protected $database;
+
+    protected $account;
 
     protected $username;
 
-    public function __construct(Database $database, $username)
+    //public function __construct(Database $database, Account $account, $username)
+    public function __construct(Account $account, $username)
     {
-        $this->database = $database;
+        //$this->database = $database;
+        $this->account = $account;
         $this->username = $username;
     }
 
     //does the username exist
     public function getUsernameExists()
     {
-        $queryArray = array(
-            'user_accounts' => $this->username,
+        return $this->account->getExists('username', $this->username);
+        /**$queryArray = array(
+            'username' => $this->username,
         );
         $this->database->setTableName('user_accounts');
         $this->database->setQueryData($queryArray);
@@ -37,7 +42,7 @@ class Usernames
             return false;
         } else {
             return true;
-        }
+        }**/
     }
 
     //is the username valid
@@ -45,8 +50,9 @@ class Usernames
     {
         if ($this->isValidLength() === true && $this->isValidCharacters() === true) {
             return true;
+        } else {
+            return false;
         }
-        return false;
     }
 
     //is it at least 3 characters long

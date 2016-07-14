@@ -6,7 +6,7 @@
  * Time: 8:46 PM
  */
 
-class Password
+class Password extends Account
 {
 
     protected $userPassword;
