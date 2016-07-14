@@ -10,12 +10,12 @@ set_include_path('./classes');
 spl_autoload_register();
 
 $database = new Database();
-$createAccount = new CreateAccount($database);
-$account = new Account($database);
 $csrfToken = new CsrfToken();
 
 if ($csrfToken->compareToken() === true) {
     echo 'test';
+    $createAccount = new CreateAccount($database);
+    $account = new Account($database);
     $username = new Username($account, $_POST['username']);
     $password = new Password($_POST['user_password'], $_POST['user_password_confirm']);
     $email = new EmailAddress($account, $_POST['email_address']);
