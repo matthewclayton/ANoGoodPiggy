@@ -12,10 +12,14 @@ spl_autoload_register();
 $database = new Database();
 $createAccount = new CreateAccount($database);
 $account = new Account($database);
-$username = new Username($account, $_POST['username']);
-$password = new Password($_POST['user_password'], $_POST['user_password_confirm']);
-$email = new EmailAddress($account, $_POST['email_address']);
+$csrfToken = new CsrfToken();
 
+if ($csrfToken->compareToken() === true) {
+    echo 'test';
+    $username = new Username($account, $_POST['username']);
+    $password = new Password($_POST['user_password'], $_POST['user_password_confirm']);
+    $email = new EmailAddress($account, $_POST['email_address']);
+}
 
 
 include('views/register.phtml');

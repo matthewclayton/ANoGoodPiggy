@@ -13,6 +13,7 @@
     <br>
     Email Address<input type="text" name="email_address" value="you@example.com">
     <br>
+    <input type="hidden" name="token" value="<?php echo $csrfToken->getToken(); ?>">
     <input type="submit" value="Submit">
 </form>
 
