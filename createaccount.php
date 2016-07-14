@@ -20,7 +20,8 @@ if ($csrfToken->compareToken() === true) {
     $password = new Password($_POST['user_password'], $_POST['user_password_confirm']);
     $email = new EmailAddress($account, $_POST['email_address']);
 } else {
-    echo 'nopenothere';
+    $csrfToken->generateToken();
+    $csrfToken->setSessionToken();
 }
 
 
