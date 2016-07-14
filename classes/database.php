@@ -12,7 +12,7 @@ class Database
 
     private $dbUser = 'dev';
 
-    private $dbPass = 'Ed(}dB@P%e$vsj)KaM*_nW{8jG!TH>pTE:.sf#N8zuGB<aYQ_9';
+    private $dbPass = '*{Hj5X>@4Vbrp}tbR($a.:fk2dK85m,!_Z<k!fh$#h^T?[1)b#';
 
     private $dbName = 'dev';
 
@@ -38,7 +38,6 @@ class Database
     {
         $this->connect();
         if ($this->db->connect_error) {
-            echo $this->db->connect_error;
             die('Error Connecting to Database');
         }
     }
