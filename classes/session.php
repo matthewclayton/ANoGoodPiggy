@@ -10,6 +10,7 @@ class Session
 {
     public function __construct()
     {
+        echo 'all in';
         if (session_status() !== PHP_SESSION_ACTIVE) {
             session_start();
         }
