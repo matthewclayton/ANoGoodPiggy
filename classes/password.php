@@ -8,5 +8,41 @@
 
 class Password
 {
-    
+
+    protected $userPassword;
+
+    protected $userPasswordConfirm;
+
+    public function __construct($userPassword, $userPasswordConfirm)
+    {
+        $this->database = $database;
+        $this->userPassword = $userPassword;
+        $this->userPasswordConfirm = $userPasswordConfirm;
+    }
+
+    protected function isValidLength()
+    {
+        return strlen($this->userPassword) >= 7;
+    }
+
+    protected function isMixedCharacters()
+    {
+        if (ctype_alpha($this->userPassword) !== true && ctype_digit($this->userPassword) !== true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    protected function isMatching()
+    {
+        if ($this->userPassword === $this->userPasswordConfirm) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+
 }

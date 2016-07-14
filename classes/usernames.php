@@ -52,7 +52,7 @@ class Usernames
     //is it at least 3 characters long
     protected function isValidLength()
     {
-        return strlen($this->username) < 3;
+        return strlen($this->username) >= 3;
         /**if (strlen($this->username) < 3) {
             return false;
         } else {
