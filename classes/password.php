@@ -13,10 +13,13 @@ class Password extends Account
 
     protected $userPasswordConfirm;
 
-    public function __construct($userPassword, $userPasswordConfirm)
+    //public function __construct($userPassword, $userPasswordConfirm)
+    public function __construct()
     {
-        $this->userPassword = $userPassword;
-        $this->userPasswordConfirm = $userPasswordConfirm;
+        //$this->userPassword = $userPassword;
+        //$this->userPasswordConfirm = $userPasswordConfirm;
+        $this->userPassword = $_POST['user_password'];
+        $this->userPasswordConfirm = $_POST['user_password_confirm'];
     }
 
     protected function isValidLength()
@@ -41,6 +44,15 @@ class Password extends Account
         } else {
             return false;
         }**/
+    }
+
+    protected function isValidPassword()
+    {
+        if ($this->isMixedCharacters() === true && $this->isValidLength() === true) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 

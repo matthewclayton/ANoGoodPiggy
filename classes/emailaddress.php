@@ -12,9 +12,11 @@ class EmailAddress extends Account
     protected $emailAddress;
 
     //public function __construct(Database $database, Account $account, $emailAddress)
-    public function __construct(Account $account, $emailAddress)
+   // public function __construct(Account $account, $emailAddress)
+    public function __construct()
     {
-        $this->emailAddress = $emailAddress;
+        //$this->emailAddress = $emailAddress;
+        $this->emailAddress = $_POST['email_address'];
     }
 
     protected function validEmailFormat()
@@ -35,7 +37,8 @@ class EmailAddress extends Account
 
     protected function getEmailExists()
     {
-        return $this->account->getExists('email_address', $this->emailAddress);
+        //return $this->account->getExists('email_address', $this->emailAddress);
+        return parent::getExists('email_address', $this->emailAddress);
     }
 
 

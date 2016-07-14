@@ -16,22 +16,24 @@ class Username extends Account
 
    //protected $database;
 
-    protected $account;
+    //protected $account;
 
     protected $username;
 
     //public function __construct(Database $database, Account $account, $username)
-    public function __construct(Account $account, $username)
+    //public function __construct(Account $account, $username)
+    public function __construct()
     {
         //$this->database = $database;
-        $this->account = $account;
-        $this->username = $username;
+        //$this->account = $account;
+        $this->username = $_POST['username'];
     }
 
     //does the username exist
-    public function getUsernameExists()
+    protected function getUsernameExists()
     {
-        return $this->account->getExists('username', $this->username);
+        parent::getExists('username', $this->username);
+        //return $this->account->getExists('username', $this->username);
         /**$queryArray = array(
             'username' => $this->username,
         );
@@ -46,7 +48,7 @@ class Username extends Account
     }
 
     //is the username valid
-    public function isUsernameValid()
+    protected function isUsernameValid()
     {
         if ($this->isValidLength() === true && $this->isValidCharacters() === true) {
             return true;
