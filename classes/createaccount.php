@@ -37,11 +37,24 @@ class CreateAccount
         $this->createUser();
     }
 
+    public function isNewUserValid()
+    {
+        $this->username->getUsernameExists();
+        $this->username->isUsernameValid();
+        $this->password->isValidPassword();
+        $this->password->isMatching();
+        $this->email->getEmailExists();
+        $this->email->isValidEmailAddress();
+        return true;
+    }
+
     protected function createUser()
     {
-        $this->database->setTableName('user_accounts');
-        $this->database->setQueryData($this->getNewUser());
-        $this->database->insertMultiple();
+        if ($this->isNewUserValid() === true) {
+            $this->database->setTableName('user_accounts');
+            $this->database->setQueryData($this->getNewUser());
+            $this->database->insertMultiple();
+        }
     }
 
     protected function getNewUser()
