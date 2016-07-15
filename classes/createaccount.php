@@ -40,8 +40,8 @@ class CreateAccount
     public function isNewUserValid()
     {
         $this->username->getUsernameExists();
-        /**$this->username->isUsernameValid();
-        $this->password->isValidPassword();
+        $this->username->isUsernameValid();
+        /**$this->password->isValidPassword();
         $this->password->isMatching();
         $this->email->getEmailExists();
         $this->email->isValidEmailAddress();
