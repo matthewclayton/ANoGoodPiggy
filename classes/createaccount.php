@@ -38,7 +38,7 @@ class CreateAccount
     {
         try {
             $this->username->getUsernameExists() === true;
-            throw new Exception('That username already exists');
+            throw new Exception('That username already exists.');
         } catch (Exception $e) {
             echo $e->getMessage();
         }
@@ -47,19 +47,19 @@ class CreateAccount
         }**/
         try {
             $this->username->isUsernameValid() === false;
-            throw new Exception('Usernames must be at least 3 characters long consisting of only numbers and letters');
+            throw new Exception('Usernames must be at least 3 characters long consisting of only numbers and letters.');
         } catch (Exception $e) {
             echo $e->getMessage();
         }
         try {
             $this->password->isMatching() === false;
-            throw new Exception('Passwords do not match');
+            throw new Exception('Passwords do not match.');
         } catch (Exception $e) {
             echo $e->getMessage();
         }
         try {
             $this->password->isValidPassword() === false;
-            throw new Exception('Password must be at least 7 characters, and contain at least one number, letter, or symbol');
+            throw new Exception('Password must be at least 7 characters, and contain at least one number, letter, or symbol.');
         } catch (Exception $e) {
             echo $e->getMessage();
         }
