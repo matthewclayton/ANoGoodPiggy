@@ -39,11 +39,15 @@ class CreateAccount
     public function checkUsername()
     {
         try {
-            $this->username->getUsernameExists();
-            $this->username->isUsernameValid();
-        } catch (Exception $e) {
-            echo $e->getMessage();
-        }
+            if ($this->username->getUsernameExists() === true) {
+                throw new Exception('Username already exists!');
+            }
+            if ($this->username->isUsernameValid() === false) {
+                throw new Exception('Username must be at least 3 alpha-numeric characters long.');
+            }
+            } catch (Exception $e) {
+                echo $e->getMessage();
+            }
         return true;
     }
 
