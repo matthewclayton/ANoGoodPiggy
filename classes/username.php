@@ -35,7 +35,7 @@ class Username extends Account
     }
 
     //does the username exist
-    protected function getUsernameExists()
+    public function getUsernameExists()
     {
         parent::getExists('username', $this->username);
         //return $this->account->getExists('username', $this->username);
@@ -53,7 +53,7 @@ class Username extends Account
     }
 
     //is the username valid
-    protected function isUsernameValid()
+    public function isUsernameValid()
     {
         if ($this->isValidLength() === true && $this->isValidCharacters() === true) {
             return true;

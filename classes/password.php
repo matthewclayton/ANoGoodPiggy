@@ -36,7 +36,7 @@ class Password extends Account
         }
     }
 
-    protected function isMatching()
+    public function isMatching()
     {
         return ($this->userPassword === $this->userPasswordConfirm);
         /**if ($this->userPassword === $this->userPasswordConfirm) {
@@ -46,7 +46,7 @@ class Password extends Account
         }**/
     }
 
-    protected function isValidPassword()
+    public function isValidPassword()
     {
         if ($this->isMixedCharacters() === true && $this->isValidLength() === true) {
             return true;
