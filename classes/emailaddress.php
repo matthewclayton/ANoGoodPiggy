@@ -11,11 +11,8 @@ class EmailAddress extends Account
 
     protected $emailAddress;
 
-    //public function __construct(Database $database, Account $account, $emailAddress)
-   // public function __construct(Account $account, $emailAddress)
     public function __construct()
     {
-        //$this->emailAddress = $emailAddress;
         $this->emailAddress = $_POST['email_address'];
     }
 
@@ -37,12 +34,10 @@ class EmailAddress extends Account
     protected function validEmailDomain()
     {
         return checkdnsrr($this->getDomain(), 'MX');
-
     }
 
     protected function getEmailExists()
     {
-        //return $this->account->getExists('email_address', $this->emailAddress);
         return parent::getExists('email_address', $this->emailAddress);
     }
 

@@ -13,11 +13,8 @@ class Password extends Account
 
     protected $userPasswordConfirm;
 
-    //public function __construct($userPassword, $userPasswordConfirm)
     public function __construct()
     {
-        //$this->userPassword = $userPassword;
-        //$this->userPasswordConfirm = $userPasswordConfirm;
         $this->userPassword = $_POST['user_password'];
         $this->userPasswordConfirm = $_POST['user_password_confirm'];
     }
@@ -39,11 +36,6 @@ class Password extends Account
     public function isMatching()
     {
         return ($this->userPassword === $this->userPasswordConfirm);
-        /**if ($this->userPassword === $this->userPasswordConfirm) {
-            return true;
-        } else {
-            return false;
-        }**/
     }
 
     public function isValidPassword()
