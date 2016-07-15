@@ -23,11 +23,11 @@ class CreateAccount
 
     protected $newUser = array();
 
-    public function __construct(Database $database, Account $account, Username $username,
+    public function __construct(Database $database, Username $username,
                                 Password $password, EmailAddress $email,
                                 PasswordCrypt $passwordCrypt)
     {
-        $this->account       = $account;
+        //$this->account       = $account;
         $this->database      = $database;
         $this->username      = $username;
         $this->password      = $password;
