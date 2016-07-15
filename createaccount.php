@@ -13,11 +13,10 @@ $database = new Database();
 $csrfToken = new CsrfToken();
 
 if ($csrfToken->compareToken() === true) {
-    $username      = new Username($database);
+    $username      = new Username();
     $password      = new Password();
     $email         = new EmailAddress();
     $passwordCrypt = new PasswordCrypt($_POST['user_password']);
-    $account       = new Account($database);
     $createAccount = new CreateAccount($database, $account, $username, $password, $email, $passwordCrypt);
 } else {
     $csrfToken->generateToken();
