@@ -37,51 +37,34 @@ class CreateAccount
     public function isNewUserValid()
     {
         try {
-            $this->username->isUsernameValid();
+            if ($this->username->getUsernameExists() === true) {
+                throw new Exception('Username already exists!');
+            }
+            if ($this->username->isUsernameValid() === false) {
+                throw new Exception('Username must be at least 3 alpha-numeric characters long.');
+            }
+            if ($this->password->isValidPassword() === false) {
+                throw new Exception('Password must be at least 7 characters, containing one number/letter/symbol.');
+            }
+            if ($this->password->isMatching() === false) {
+                throw new Exception('Passwords do not match.');
+            }
+            if ($this->email->getEmailExists() === true) {
+                throw new Exception('This email address is already registered with another account.');
+            }
+            if ($this->email->isValidEmailAddress() === false) {
+                throw new Exception('Email address is invalid.');
+            }
         } catch (Exception $e) {
             echo $e->getMessage();
         }
-        try {
-            $this->username->getUsernameExists();
-        } catch (Exception $e) {
-            echo $e->getMessage();
-        }
-        try {
-            $this->password->isMatching();
-        } catch (Exception $e) {
-            echo $e->getMessage();
-        }
-        try {
-            $this->password->isValidPassword();
-        } catch (Exception $e) {
-            echo $e->getMessage();
-        }
-        try {
-            $this->password->isMatching();
-        } catch (Exception $e) {
-            echo $e->getMessage();
-        }
-        try {
-            $this->email->isValidEmailAddress();
-        } catch (Exception $e) {
-            echo $e->getMessage();
-        }
-        try {
-            $this->email->getEmailExists();
-        } catch (Exception $e) {
-            echo $e->getMessage();
-        }
-        return true;
     }
-
 
     protected function createUser()
     {
-        if ($this->isNewUserValid() === true) {
             $this->database->setTableName('user_accounts');
             $this->database->setQueryData($this->getNewUser());
             $this->database->insertMultiple();
-        }
     }
 
     protected function getNewUser()

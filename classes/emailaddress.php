@@ -39,7 +39,6 @@ class EmailAddress extends Account
     public function getEmailExists()
     {
         if (parent::getExists('email_address', $this->emailAddress) === true) {
-            throw new Exception('That email is already registered to another account.');
             return true;
         } else {
             return false;
@@ -51,7 +50,6 @@ class EmailAddress extends Account
         if ($this->validEmailFormat() === true && $this->validEmailDomain === true) {
             return true;
         } else {
-            throw new Exception('Invalid email format, or email domain does not exist!');
             return false;
         }
     }
