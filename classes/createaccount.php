@@ -64,7 +64,6 @@ class CreateAccount
         if ($this->username->getUsernameExists() === true) {
             throw new Exception('That username already exists');
         }
-
         if ($this->username->isUsernameValid() === false) {
             throw new Exception('Usernames must be at least 3 characters long consisting of only numbers and letters');
         }
@@ -79,10 +78,13 @@ class CreateAccount
 
     protected function createUser()
     {
-        if ($this->isNewUserValid() === true) {
+        try {
+            $this->isNewUserValid();
             $this->database->setTableName('user_accounts');
             $this->database->setQueryData($this->getNewUser());
             $this->database->insertMultiple();
+        } catch (Exception $e) {
+            echo $e->getMessage();
         }
     }
 
