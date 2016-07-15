@@ -54,10 +54,14 @@ class CreateAccount
     public function checkPassword()
     {
         try {
-            $this->password->isMatching();
-            $this->password->isValidPassword();
+            if ($this->password->isMatching() === false) {
+                throw new Exception('Passwords do not match.');
+            }
+            if ($this->password->isValidPassword() === false) {
+                throw new Exception('Password must be at least 7 characters, containing one number/letter/symbol.');
+            }
         } catch (Exception $e) {
-            echo $e->getMessage();
+            return false;
         }
         return true;
     }
@@ -65,10 +69,14 @@ class CreateAccount
     public function checkEmail()
     {
         try {
-            $this->email->isValidEmailAddress();
-            $this->email->getEmailExists();
+            if ($this->email->isValidEmailAddress() === false) {
+                throw new Exception('Email address is invalid.');
+            }
+            if ($this->email->getEmailExists() === true) {
+                throw new Exception('This email address is already registered with another account.');
+            }
         } catch (Exception $e) {
-            echo $e->getMessage();
+            return false;
         }
         return true;
     }
@@ -80,6 +88,8 @@ class CreateAccount
             $this->database->setTableName('user_accounts');
             $this->database->setQueryData($this->getNewUser());
             $this->database->insertMultiple();
+        } else {
+
         }
     }
 

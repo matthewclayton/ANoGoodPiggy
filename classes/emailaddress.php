@@ -42,7 +42,7 @@ class EmailAddress extends Account
         if (parent::getExists('email_address', $this->emailAddress) === true) {
             return true;
         } else {
-            throw new Exception('This email address is already registered with another account.');
+            return false;
         }
     }
 
@@ -51,7 +51,7 @@ class EmailAddress extends Account
         if ($this->validEmailFormat() === true && $this->validEmailDomain() === true) {
             return true;
         } else {
-            throw new Exception('Email address is invalid.');
+            return false;
         }
     }
 
