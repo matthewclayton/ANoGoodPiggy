@@ -45,9 +45,9 @@ class CreateAccount
             if ($this->username->isUsernameValid() === false) {
                 throw new Exception('Username must be at least 3 alpha-numeric characters long.');
             }
-            } catch (Exception $e) {
-                echo $e->getMessage();
-            }
+        } catch (Exception $e) {
+            return false;
+        }
         return true;
     }
 
