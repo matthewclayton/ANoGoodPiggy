@@ -27,7 +27,6 @@ class CreateAccount
                                 Password $password, EmailAddress $email,
                                 PasswordCrypt $passwordCrypt)
     {
-        //$this->account       = $account;
         $this->database      = $database;
         $this->username      = $username;
         $this->password      = $password;
@@ -39,12 +38,16 @@ class CreateAccount
 
     public function isNewUserValid()
     {
-        $this->username->getUsernameExists();
-        $this->username->isUsernameValid();
-        $this->password->isValidPassword();
-        $this->password->isMatching();
-        $this->email->getEmailExists();
-        $this->email->isValidEmailAddress();
+        try {
+            $this->username->getUsernameExists();
+            $this->username->isUsernameValid();
+            $this->password->isValidPassword();
+            $this->password->isMatching();
+            $this->email->getEmailExists();
+            $this->email->isValidEmailAddress();
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
         return true;
     }
 
