@@ -42,7 +42,7 @@ class CreateAccount
             $this->username->getUsernameExists();
             $this->username->isUsernameValid();
         } catch (Exception $e) {
-            $e->getMessage();
+            echo $e->getMessage();
         }
         return true;
     }
@@ -53,7 +53,7 @@ class CreateAccount
             $this->password->isMatching();
             $this->password->isValidPassword();
         } catch (Exception $e) {
-            $e->getMessage();
+            echo $e->getMessage();
         }
         return true;
     }
@@ -64,7 +64,7 @@ class CreateAccount
             $this->email->isValidEmailAddress();
             $this->email->getEmailExists();
         } catch (Exception $e) {
-            $e->getMessage();
+            echo $e->getMessage();
         }
         return true;
     }
