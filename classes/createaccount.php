@@ -40,9 +40,11 @@ class CreateAccount
     {
         try {
             if ($this->username->getUsernameExists() === true) {
+                echo 'fail0';
                 throw new Exception('Username already exists!');
             }
             if ($this->username->isUsernameValid() === false) {
+                echo 'fail0.5';
                 throw new Exception('Username must be at least 3 alpha-numeric characters long.');
             }
         } catch (Exception $e) {
