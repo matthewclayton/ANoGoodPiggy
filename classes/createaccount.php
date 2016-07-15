@@ -46,6 +46,7 @@ class CreateAccount
                 throw new Exception('Username must be at least 3 alpha-numeric characters long.');
             }
         } catch (Exception $e) {
+            echo 'fail1';
             return false;
         }
         return true;
@@ -61,6 +62,7 @@ class CreateAccount
                 throw new Exception('Password must be at least 7 characters, containing one number/letter/symbol.');
             }
         } catch (Exception $e) {
+            echo 'fail2';
             return false;
         }
         return true;
@@ -76,6 +78,7 @@ class CreateAccount
                 throw new Exception('This email address is already registered with another account.');
             }
         } catch (Exception $e) {
+            echo 'fail3';
             return false;
         }
         return true;
@@ -89,7 +92,7 @@ class CreateAccount
             $this->database->setQueryData($this->getNewUser());
             $this->database->insertMultiple();
         } else {
-
+            echo 'fail4';
         }
     }
 
