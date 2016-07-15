@@ -46,13 +46,16 @@ class CreateAccount
         } catch (Exception $e) {
             echo $e->getMessage();
         }
+        return true;
     }
 
     protected function createUser()
     {
+        if ($this->isNewUserValid() === true) {
             $this->database->setTableName('user_accounts');
             $this->database->setQueryData($this->getNewUser());
             $this->database->insertMultiple();
+        }
     }
 
     protected function getNewUser()
