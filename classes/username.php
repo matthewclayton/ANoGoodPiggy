@@ -28,21 +28,27 @@ class Username extends Account
 
     public function getUsernameExists()
     {
-        if (parent::getExists('username', $this->username) === true) {
-            return true;
-        } else {
-            //return false;
-            throw new Exception('Username already exists!');
+        try {
+            if (parent::getExists('username', $this->username) === true) {
+                return true;
+            } else {
+                throw new Exception('Username already exists!');
+            }
+        } catch (Exception $e) {
+            echo $e->getMessage();
         }
     }
 
     public function isUsernameValid()
     {
-        if ($this->isValidLength() === true && $this->isValidCharacters() === true) {
-            return true;
-        } else {
-            //return false;
-            throw new Exception('Username must be at least 3 alpha-numeric characters long.');
+        try {
+            if ($this->isValidLength() === true && $this->isValidCharacters() === true) {
+                return true;
+            } else {
+                throw new Exception('Username must be at least 3 alpha-numeric characters long.');
+            }
+        } catch (Exception $e) {
+            echo $e->getMessage();
         }
     }
 

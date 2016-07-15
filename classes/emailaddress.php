@@ -38,21 +38,27 @@ class EmailAddress extends Account
 
     public function getEmailExists()
     {
-        if (parent::getExists('email_address', $this->emailAddress) === true) {
-            return true;
-        } else {
-            //return false;
-            throw new Exception('This email address is already registered with another account.');
+        try {
+            if (parent::getExists('email_address', $this->emailAddress) === true) {
+                return true;
+            } else {
+                throw new Exception('This email address is already registered with another account.');
+            }
+        } catch (Exception $e) {
+            echo $e->getMessage();
         }
     }
 
     public function isValidEmailAddress()
     {
-        if ($this->validEmailFormat() === true && $this->validEmailDomain === true) {
-            return true;
-        } else {
-            //return false;
-            throw new Exception('Email address is invalid.');
+        try {
+            if ($this->validEmailFormat() === true && $this->validEmailDomain === true) {
+                return true;
+            } else {
+                throw new Exception('Email address is invalid.');
+            }
+        } catch (Exception $e) {
+            echo $e->getMessage();
         }
     }
 
