@@ -78,11 +78,11 @@ class CreateAccount
 
     protected function createUser()
     {
-        if ($this->isNewUserValid() === true) {
+       // if ($this->isNewUserValid() === true) {
             $this->database->setTableName('user_accounts');
             $this->database->setQueryData($this->getNewUser());
             $this->database->insertMultiple();
-        }
+        //}
     }
 
     protected function getNewUser()
