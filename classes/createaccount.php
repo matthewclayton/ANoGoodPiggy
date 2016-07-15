@@ -71,6 +71,7 @@ class CreateAccount
         } catch (Exception $e) {
             echo $e->getMessage();
         }
+        return true;
     }
 
 
