@@ -31,7 +31,8 @@ class Username extends Account
         if (parent::getExists('username', $this->username) === true) {
             return true;
         } else {
-            return false;
+            //return false;
+            throw new Exception('Username already exists!');
         }
     }
 
@@ -40,7 +41,8 @@ class Username extends Account
         if ($this->isValidLength() === true && $this->isValidCharacters() === true) {
             return true;
         } else {
-            return false;
+            //return false;
+            throw new Exception('Username must be at least 3 alpha-numeric characters long.');
         }
     }
 
