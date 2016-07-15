@@ -16,7 +16,7 @@ class Username extends Account
 
     protected $username;
 
-    public function __construct(Database $database)
+    public function __construct($database)
     {
         parent::__construct($database);
         $this->username = $_POST['username'];

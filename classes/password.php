@@ -13,8 +13,9 @@ class Password extends Account
 
     protected $userPasswordConfirm;
 
-    public function __construct()
+    public function __construct($database)
     {
+        parent::__construct($database);
         $this->userPassword = $_POST['user_password'];
         $this->userPasswordConfirm = $_POST['user_password_confirm'];
     }

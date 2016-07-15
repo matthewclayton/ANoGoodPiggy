@@ -11,8 +11,9 @@ class EmailAddress extends Account
 
     protected $emailAddress;
 
-    public function __construct()
+    public function __construct($database)
     {
+        parent::__construct($database);
         $this->emailAddress = $_POST['email_address'];
     }
 

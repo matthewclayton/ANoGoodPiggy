@@ -13,9 +13,9 @@ $database = new Database();
 $csrfToken = new CsrfToken();
 
 if ($csrfToken->compareToken() === true) {
-    $username      = new Username();
-    $password      = new Password();
-    $email         = new EmailAddress();
+    $username      = new Username($database);
+    $password      = new Password($database);
+    $email         = new EmailAddress($database);
     $passwordCrypt = new PasswordCrypt($_POST['user_password']);
     $createAccount = new CreateAccount($database, $account, $username, $password, $email, $passwordCrypt);
 } else {
