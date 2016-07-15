@@ -41,6 +41,36 @@ class CreateAccount
         } catch (Exception $e) {
             echo $e->getMessage();
         }
+        try {
+            $this->username->getUsernameExists();
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+        try {
+            $this->password->isMatching();
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+        try {
+            $this->password->isValidPassword();
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+        try {
+            $this->password->isMatching();
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+        try {
+            $this->email->isValidEmailAddress();
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+        try {
+            $this->email->getEmailExists();
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
     }
 
 

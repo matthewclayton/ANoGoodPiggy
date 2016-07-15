@@ -36,9 +36,24 @@ class EmailAddress extends Account
         return checkdnsrr($this->getDomain(), 'MX');
     }
 
-    protected function getEmailExists()
+    public function getEmailExists()
     {
-        return parent::getExists('email_address', $this->emailAddress);
+        if (parent::getExists('email_address', $this->emailAddress) === true) {
+            throw new Exception('That email is already registered to another account.');
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function isValidEmailAddress()
+    {
+        if ($this->validEmailFormat() === true && $this->validEmailDomain === true) {
+            return true;
+        } else {
+            throw new Exception('Invalid email format, or email domain does not exist!');
+            return false;
+        }
     }
 
 

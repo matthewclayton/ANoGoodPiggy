@@ -28,7 +28,12 @@ class Username extends Account
 
     public function getUsernameExists()
     {
-        parent::getExists('username', $this->username);
+        if (parent::getExists('username', $this->username) === true) {
+            throw new Exception('That username already exists!');
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function isUsernameValid()
@@ -36,7 +41,6 @@ class Username extends Account
         if ($this->isValidLength() === true && $this->isValidCharacters() === true) {
             return true;
         } else {
-            //return false;
             throw new Exception('Username must be at least 3 characters containing only numbers and letters.');
             return false;
         }
