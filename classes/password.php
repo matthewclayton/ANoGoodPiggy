@@ -36,27 +36,19 @@ class Password extends Account
 
     public function isMatching()
     {
-        try {
-            if ($this->userPassword === $this->userPasswordConfirm) {
-                return true;
-            } else {
-                throw new Exception('Passwords do not match.');
-            }
-        }  catch (Exception $e) {
-            echo $e->getMessage();
+        if ($this->userPassword === $this->userPasswordConfirm) {
+            return true;
+        } else {
+            throw new Exception('Passwords do not match.');
         }
     }
 
     public function isValidPassword()
     {
-        try {
-            if ($this->isMixedCharacters() === true && $this->isValidLength() === true) {
-                return true;
-            } else {
-                throw new Exception('Password must be at least 7 characters, containing one number/letter/symbol.');
-            }
-        } catch (Exception $e) {
-            echo $e->getMessage();
+        if ($this->isMixedCharacters() === true && $this->isValidLength() === true) {
+            return true;
+        } else {
+            throw new Exception('Password must be at least 7 characters, containing one number/letter/symbol.');
         }
     }
 

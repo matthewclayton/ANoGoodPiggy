@@ -36,24 +36,43 @@ class CreateAccount
         $this->createUser();
     }
 
-    public function isNewUserValid()
+    public function checkUsername()
     {
         try {
             $this->username->getUsernameExists();
             $this->username->isUsernameValid();
-            $this->password->isValidPassword();
-            $this->password->isMatching();
-            $this->email->getEmailExists();
-            $this->email->isValidEmailAddress();
         } catch (Exception $e) {
-            echo $e->getMessage();
+            $e->getMessage();
         }
         return true;
     }
 
+    public function checkPassword()
+    {
+        try {
+            $this->password->isMatching();
+            $this->password->isValidPassword();
+        } catch (Exception $e) {
+            $e->getMessage();
+        }
+        return true;
+    }
+
+    public function checkEmail()
+    {
+        try {
+            $this->email->isValidEmailAddress();
+            $this->email->getEmailExists();
+        } catch (Exception $e) {
+            $e->getMessage();
+        }
+        return true;
+    }
+
+
     protected function createUser()
     {
-        if ($this->isNewUserValid() === true) {
+        if ($this->checkUsername() === true && $this->checkPassword() === true && $this->checkEmail() === true) {
             $this->database->setTableName('user_accounts');
             $this->database->setQueryData($this->getNewUser());
             $this->database->insertMultiple();
