@@ -19,6 +19,11 @@ class EmailAddress extends Account
         $this->emailAddress = $_POST['email_address'];
     }
 
+    public function getEmailAddress()
+    {
+        return $this->emailAddress;
+    }
+
     protected function validEmailFormat()
     {
         return filter_var($this->emailAddress, FILTER_VALIDATE_EMAIL);

@@ -22,6 +22,8 @@ class PasswordCrypt
     public function __construct($userPassword)
     {
         $this->passwordText = $userPassword;
+        $this->setHashOptions();
+        $this->setHash();
     }
 
     public function getCost()
@@ -44,7 +46,7 @@ class PasswordCrypt
         $this->passwordHash = password_hash($this->passwordText, PASSWORD_BCRYPT, $this->getHashOptions());
     }
 
-    protected function getHash()
+    public function getHash()
     {
         return $this->passwordHash;
     }

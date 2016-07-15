@@ -17,15 +17,24 @@ class CreateAccount
 
     protected $email;
 
-    public function __construct(Database $database, $username, $password, $email)
+    protected $passwordCrypt;
+
+    protected $newUser = array();
+
+    public function __construct(Database $database, Username $username,
+                                Password $password, EmailAddress $email,
+                                PasswordCrypt $passwordCrypt)
     {
-        $this->database = $database;
-        $this->username = $username;
-        $this->password = $password;
-        $this->email    = $email;
+        $this->database      = $database;
+        $this->username      = $username;
+        $this->password      = $password;
+        $this->email         = $email;
+        $this->passwordCrypt = $passwordCrypt;
+        $this->setNewUser();
+        $this->createUser();
     }
 
-    public function isNewUserValid()
+    /**public function isNewUserValid()
     {
         if ($this->username->getUsernameExists() === true) {
             throw new Exception('That username already exists');
@@ -40,11 +49,27 @@ class CreateAccount
             throw new Exception('Password must be at least 7 characters, and contain at least one number, letter, or symbol');
         }
         return true;
-    }
+    }**/
 
     protected function createUser()
     {
+        $this->database->setTableName('user_accounts');
+        $this->database->setQueryData($this->getNewUser());
+        $this->database->insertMultiple();
+    }
 
+    protected function getNewUser()
+    {
+        return $this->newUser;
+    }
+
+    protected function setNewUser()
+    {
+        $this->newUser[] = array(
+            'username' => $this->username->getUsername(),
+            'user_password' => $this->passwordCrypt->getHash(),
+            'email_address' => $this->email->getEmailAddress(),
+        );
     }
 
     //encrpyt the password

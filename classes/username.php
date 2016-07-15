@@ -29,6 +29,11 @@ class Username extends Account
         $this->username = $_POST['username'];
     }
 
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
     //does the username exist
     protected function getUsernameExists()
     {

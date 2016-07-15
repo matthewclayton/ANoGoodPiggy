@@ -20,7 +20,8 @@ if ($csrfToken->compareToken() === true) {
     $password = new Password();
     //$email = new EmailAddress($account, $_POST['email_address']);
     $email = new EmailAddress();
-    $createAccount = new CreateAccount($database, $username, $password, $email);
+    $passwordCrypt = new PasswordCrypt($_POST['user_password']);
+    $createAccount = new CreateAccount($database, $username, $password, $email, $passwordCrypt);
 } else {
     $csrfToken->generateToken();
     $csrfToken->setSessionToken();
