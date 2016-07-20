@@ -40,8 +40,8 @@ class CreateAccount
 
     public function isUserValid()
     {
-        return $this->username->isUsernameValid() === true ||
-               $this->password->isPasswordValid() === true ||
+        return $this->username->isUsernameValid() === true &&
+               $this->password->isPasswordValid() === true &&
                $this->email->isEmailValid()       === true;
     }
 
