@@ -174,6 +174,8 @@ class Database
 
         $prepareStmt->execute();
 
+        $prepareStmt->store_result();
+
         $this->setNumRows($prepareStmt->num_rows);
 
         return $prepareStmt->get_result();
