@@ -155,6 +155,11 @@ class Database
         return $this->numRows;
     }
 
+    public function setNumRows($stmt)
+    {
+        $this->numRows = $stmt->num_rows;
+    }
+
     public function select()
     {
         $this->setPlaceholders();
@@ -167,11 +172,10 @@ class Database
 
         call_user_func_array(array($prepareStmt, 'bind_param'), $this->setBindParms());
 
-        $success = $prepareStmt->execute();
+        $stmt = $prepareStmt->execute();
+        
+        $this->setNumRows($stmt);
 
-        if ($success === TRUE) {
-            $this->numRows++;
-        }
         return $prepareStmt->get_result();
     }
 
