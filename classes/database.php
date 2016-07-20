@@ -55,15 +55,15 @@ class Database
     public function setTableName($tableName)
     {
         if (empty($tableName)) {
-            return FALSE;
+            return false;
         }
         $this->tableName = $tableName;
     }
 
     public function setQueryData($queryData)
     {
-        if (empty($queryData) || !is_array($queryData)) {
-            return FALSE;
+        if (empty($queryData) || is_array($queryData) === false) {
+            return false;
         }
         $this->queryData = $queryData;
     }
@@ -97,10 +97,10 @@ class Database
     {
         $this->dbFields = array();
         $this->dbValues = array();
-        foreach ($this->queryData AS $field=>$value) {
+        foreach ($this->queryData AS $field => $value) {
             $this->dbFields[] = $field;
             if (empty($value)) {
-                $this->dbValues[] = NULL;
+                $this->dbValues[] = null;
             }
             else {
                 $this->dbValues[] = $value;
@@ -132,7 +132,7 @@ class Database
 
         $success = $prepareStmt->execute();
 
-        if ($success === TRUE) {
+        if ($success === true) {
             $this->numRows++;
         }
     }
@@ -155,9 +155,9 @@ class Database
         return $this->numRows;
     }
 
-    public function setNumRows($stmt)
+    public function setNumRows($rowCount)
     {
-        $this->numRows = $stmt;
+        $this->numRows = $rowCount;
     }
 
     public function select()
@@ -196,11 +196,12 @@ class Database
 
         call_user_func_array(array($prepareStmt, 'bind_param'), $this->setBindParms());
 
-        $success = $prepareStmt->execute();
+        $prepareStmt->execute();
 
-        if ($success === TRUE) {
-            $this->numRows++;
-        }
+        $prepareStmt->store_result();
+
+        $this->setNumRows($prepareStmt->num_rows);
+
         return $prepareStmt->get_result();
     }
 }
