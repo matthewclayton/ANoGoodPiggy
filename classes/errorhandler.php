@@ -14,6 +14,7 @@ class ErrorHandler
 
     public function logError($errorSource = self::DEFAULT_SOURCE, $error)
     {
+        echo 'a';
         $this->error[$errorSource] = $error;
     }
 
