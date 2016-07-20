@@ -21,6 +21,7 @@ class Password extends Account
         $this->error               = $error;
         $this->userPassword        = $_POST['user_password'];
         $this->userPasswordConfirm = $_POST['user_password_confirm'];
+        $this->setPasswordErrors();
     }
 
     protected function isValidLength()

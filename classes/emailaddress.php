@@ -18,6 +18,7 @@ class EmailAddress extends Account
         parent::__construct($database);
         $this->error        = $error;
         $this->emailAddress = $_POST['email_address'];
+        $this->setEmailErrors();
     }
 
     public function getEmailAddress()
@@ -45,7 +46,7 @@ class EmailAddress extends Account
         return parent::getExists('email_address', $this->emailAddress) === true;
     }
 
-    protected function setPassowrdErrors()
+    protected function setEmailErrors()
     {
         if ($this->getEmailExists() === true) {
             $this->error->logError('Email', 'Email address is already in use.');
