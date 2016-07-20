@@ -27,6 +27,7 @@ class Account
         if ($this->database->getNumRows() == 0) {
             return false;
         } else {
+            echo 'trueU' . $this->database->getNumRows();
             return true;
         }
     }
