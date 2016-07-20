@@ -35,7 +35,11 @@ class Password extends Account
 
     public function isMatching()
     {
-        return ($this->userPassword === $this->userPasswordConfirm);
+        if ($this->userPassword === $this->userPasswordConfirm) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     protected function setPasswordErrors()
