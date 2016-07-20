@@ -25,17 +25,17 @@ class Password extends Account
 
     protected function isValidLength()
     {
-        return strlen($this->userPassword) >= 7;
+        return (strlen($this->userPassword) >= 7);
     }
 
     protected function isMixedCharacters()
     {
-        return ctype_alpha($this->userPassword) !== true && ctype_digit($this->userPassword) !== true;
+        return (ctype_alpha($this->userPassword) !== true && ctype_digit($this->userPassword) !== true);
     }
 
     public function isMatching()
     {
-        return $this->userPassword === $this->userPasswordConfirm;
+        return ($this->userPassword === $this->userPasswordConfirm);
     }
 
     protected function setPasswordErrors()

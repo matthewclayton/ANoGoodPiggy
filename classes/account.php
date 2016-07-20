@@ -24,11 +24,9 @@ class Account
         $this->database->setTableName('user_accounts');
         $this->database->setQueryData($queryArray);
         $this->database->select();
-        echo 'first' . $this->database->getNumRows() . '<br>';
         if ($this->database->getNumRows() == 0) {
             return false;
         } else {
-            echo 'second' . $this->database->getNumRows();
             return true;
         }
     }
