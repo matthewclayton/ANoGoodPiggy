@@ -21,6 +21,8 @@ if ($csrfToken->compareToken() === true) {
     $createAccount = new CreateAccount($database, $username, $password, $email, $passwordCrypt, $error);
     if ($createAccount->isUserValid() === true) {
         $createAccount->saveUser();
+    } else {
+        $errorData = $error->getError();
     }
 } else {
     $csrfToken->generateToken();

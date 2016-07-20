@@ -4,6 +4,16 @@
 <title> Register </title>
 <p> Register an Account </p>
 
+<?php if (isset($errorData) === true) : ?>
+    <b>
+        <?php echo 'There were error(s) creating your account!' ?>
+    </b>
+    <?php foreach ($errorData as $errorSource => $errorValue) : ?>
+        <?php echo $errorSource . ': ' . $errorValue; ?>
+    <?php endforeach; ?>
+<?php endif; ?>
+
+
 <form action="createaccount.php" method="POST">
     Username<input type="text" name="username" value="New User">
     <br>

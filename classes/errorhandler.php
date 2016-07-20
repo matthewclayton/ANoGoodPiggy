@@ -21,4 +21,16 @@ class ErrorHandler
     {
         return array_key_exists($errorSource, $this->error);
     }
+
+    public function getError()
+    {
+        return $this->error;
+    }
+
+    /**public function getErrorBySource($errorSource = self::DEFAULT_SOURCE)
+    {
+        foreach ($this->error AS $errorKey => $errorValue) {
+            if ($errorKey === $errorSource);
+        }
+    }**/
 }
