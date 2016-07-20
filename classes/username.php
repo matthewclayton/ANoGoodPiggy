@@ -33,17 +33,17 @@ class Username extends Account
 
     public function getUsernameExists()
     {
-        return parent::getExists('username', $this->username) === true;
+        return parent::getExists('username', $this->getUsername()) === true;
     }
 
     protected function isValidLength()
     {
-        return strlen($this->username) >= 3;
+        return strlen($this->getUsername()) >= 3;
     }
 
     protected function isValidCharacters()
     {
-        return ctype_alnum($this->username);
+        return ctype_alnum($this->getUsername());
     }
 
     protected function setUsernameErrors()

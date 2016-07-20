@@ -24,6 +24,7 @@ class Account
         $this->database->setTableName('user_accounts');
         $this->database->setQueryData($queryArray);
         $this->database->select();
+        echo 'trueU1' . $this->database->getNumRows();
         if ($this->database->getNumRows() == 0) {
             return false;
         } else {

@@ -144,7 +144,7 @@ class Database
 
     public function insertMultiple()
     {
-        foreach ($this->queryData AS $key=>$valueArray) {
+        foreach ($this->queryData AS $key => $valueArray) {
             $this->queryData = $valueArray;
             $this->insert();
         }
