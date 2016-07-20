@@ -13,6 +13,9 @@
 
 class PasswordCrypt
 {
+
+    const COSTFACTOR = 9;
+
     protected $hashOptions = array();
 
     protected $passwordText;
@@ -28,7 +31,7 @@ class PasswordCrypt
 
     public function getCost()
     {
-        return 9;
+        return self::COSTFACTOR;
     }
 
     protected function setHashOptions()
