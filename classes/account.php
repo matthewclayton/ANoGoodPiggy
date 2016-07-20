@@ -19,16 +19,16 @@ class Account
     public function getExists($field, $value)
     {
         $queryArray = array(
-            'username' => $value,
+            $field => $value,
         );
         $this->database->setTableName('user_accounts');
         $this->database->setQueryData($queryArray);
         $this->database->select();
-        echo 'trueU1' . $this->database->getNumRows();
+        echo 'first' . $this->database->getNumRows() . '<br>';
         if ($this->database->getNumRows() == 0) {
             return false;
         } else {
-            echo 'trueU' . $this->database->getNumRows();
+            echo 'second' . $this->database->getNumRows();
             return true;
         }
     }
