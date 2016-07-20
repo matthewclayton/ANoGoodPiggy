@@ -9,11 +9,14 @@
 class EmailAddress extends Account
 {
 
+    protected $error;
+
     protected $emailAddress;
 
-    public function __construct($database)
+    public function __construct(Database $database, ErrorHandler $error)
     {
         parent::__construct($database);
+        $this->error        = $error;
         $this->emailAddress = $_POST['email_address'];
     }
 
@@ -39,20 +42,25 @@ class EmailAddress extends Account
 
     public function getEmailExists()
     {
-        if (parent::getExists('email_address', $this->emailAddress) === true) {
-            return true;
-        } else {
-            return false;
+        return parent::getExists('email_address', $this->emailAddress) === true;
+    }
+
+    protected function setPassowrdErrors()
+    {
+        if ($this->getEmailExists() === true) {
+            $this->error->logError('Email', 'Email address is already in use.');
+        }
+        if ($this->validEmailDomain() === false) {
+            $this->error->logError('Email', 'Invalid email domain.');
+        }
+        if ($this->validEmailFormat() === false) {
+            $this->error->logError('Email', 'Invalid email address format.');
         }
     }
 
-    public function isValidEmailAddress()
+    public function isEmailValid()
     {
-        if ($this->validEmailFormat() === true && $this->validEmailDomain() === true) {
-            return true;
-        } else {
-            return false;
-        }
+        return $this->error->hasError('Email') === false;
     }
 
 

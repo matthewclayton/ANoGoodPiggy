@@ -16,10 +16,14 @@ class Username extends Account
 
     protected $username;
 
-    public function __construct($database)
+    protected $error;
+
+    public function __construct(Database $database, ErrorHandler $error)
     {
         parent::__construct($database);
+        $this->error    = $error;
         $this->username = $_POST['username'];
+        $this->setUsernameErrors();
     }
 
     public function getUsername()
@@ -29,20 +33,7 @@ class Username extends Account
 
     public function getUsernameExists()
     {
-        if (parent::getExists('username', $this->username) === true) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public function isUsernameValid()
-    {
-        if ($this->isValidLength() === true && $this->isValidCharacters() === true) {
-            return true;
-        } else {
-            return false;
-        }
+        return parent::getExists('username', $this->username) === true;
     }
 
     protected function isValidLength()
@@ -54,4 +45,23 @@ class Username extends Account
     {
         return ctype_alnum($this->username);
     }
+
+    protected function setUsernameErrors()
+    {
+        if ($this->getUsernameExists() === true) {
+            $this->error->logError('Username', 'Username already exists.');
+        }
+        if ($this->isValidLength() === false) {
+            $this->error->logError('Username', 'Username must be at least 3 characters');
+        }
+        if ($this->isValidCharacters() === false) {
+            $this->error->logError('Username', 'Username must contain only alphanumeric characters');
+        }
+    }
+
+    public function isUsernameValid()
+    {
+        return $this->error->hasError('Username') === false;
+    }
+
 }

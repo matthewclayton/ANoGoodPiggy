@@ -9,15 +9,19 @@
 set_include_path('./classes');
 spl_autoload_register();
 
-$database = new Database();
+$database  = new Database();
 $csrfToken = new CsrfToken();
+$error     = new ErrorHandler();
 
 if ($csrfToken->compareToken() === true) {
-    $username      = new Username($database);
-    $password      = new Password($database);
-    $email         = new EmailAddress($database);
+    $username      = new Username($database, $error);
+    $password      = new Password($database, $error);
+    $email         = new EmailAddress($database, $error);
     $passwordCrypt = new PasswordCrypt($_POST['user_password']);
-    $createAccount = new CreateAccount($database, $username, $password, $email, $passwordCrypt);
+    $createAccount = new CreateAccount($database, $username, $password, $email, $passwordCrypt, $error);
+    if ($createAccount->isUserValid() === true) {
+        $createAccount->saveUser();
+    }
 } else {
     $csrfToken->generateToken();
     $csrfToken->setSessionToken();

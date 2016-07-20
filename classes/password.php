@@ -9,14 +9,17 @@
 class Password extends Account
 {
 
+    protected $error;
+
     protected $userPassword;
 
     protected $userPasswordConfirm;
 
-    public function __construct($database)
+    public function __construct(Database $database, ErrorHandler $error)
     {
         parent::__construct($database);
-        $this->userPassword = $_POST['user_password'];
+        $this->error               = $error;
+        $this->userPassword        = $_POST['user_password'];
         $this->userPasswordConfirm = $_POST['user_password_confirm'];
     }
 
@@ -27,29 +30,30 @@ class Password extends Account
 
     protected function isMixedCharacters()
     {
-        if (ctype_alpha($this->userPassword) !== true && ctype_digit($this->userPassword) !== true) {
-            return true;
-        } else {
-            return false;
-        }
+        return ctype_alpha($this->userPassword) !== true && ctype_digit($this->userPassword) !== true;
     }
 
     public function isMatching()
     {
-        if ($this->userPassword === $this->userPasswordConfirm) {
-            return true;
-        } else {
-            return false;
+        return $this->userPassword === $this->userPasswordConfirm;
+    }
+
+    protected function setPasswordErrors()
+    {
+        if ($this->isValidLength() === false) {
+            $this->error->logError('Password', 'Password must be at least 7 characters.');
+        }
+        if ($this->isMixedCharacters() === false) {
+            $this->error->logError('Password', 'Password must contain at least one character, one number or symbol.');
+        }
+        if ($this->isMatching() === false) {
+            $this->error->logError('Password', 'Passwords do not match.');
         }
     }
 
-    public function isValidPassword()
+    public function isPasswordValid()
     {
-        if ($this->isMixedCharacters() === true && $this->isValidLength() === true) {
-            return true;
-        } else {
-            return false;
-        }
+        return $this->error->hasError('Password') === false;
     }
 
 

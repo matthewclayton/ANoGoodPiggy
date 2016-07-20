@@ -21,81 +21,35 @@ class CreateAccount
 
     protected $account;
 
+    protected $error;
+
     protected $newUser = array();
 
     public function __construct(Database $database, Username $username,
                                 Password $password, EmailAddress $email,
-                                PasswordCrypt $passwordCrypt)
+                                PasswordCrypt $passwordCrypt, ErrorHandler $error)
     {
         $this->database      = $database;
         $this->username      = $username;
         $this->password      = $password;
         $this->email         = $email;
         $this->passwordCrypt = $passwordCrypt;
+        $this->error         = $error;
         $this->setNewUser();
-        $this->createUser();
     }
 
-    public function checkUsername()
+    public function isUserValid()
     {
-        try {
-            if ($this->username->getUsernameExists() === true) {
-                echo 'fail0';
-                throw new Exception('Username already exists!');
-            }
-            if ($this->username->isUsernameValid() === false) {
-                echo 'fail0.5';
-                throw new Exception('Username must be at least 3 alpha-numeric characters long.');
-            }
-        } catch (Exception $e) {
-            echo 'fail1';
-            return false;
-        }
-        return true;
+        return $this->username->isUsernameValid() === true ||
+               $this->password->isPasswordValid() === true ||
+               $this->email->isEmailValid()       === true;
     }
 
-    public function checkPassword()
+    public function saveUser()
     {
-        try {
-            if ($this->password->isMatching() === false) {
-                throw new Exception('Passwords do not match.');
-            }
-            if ($this->password->isValidPassword() === false) {
-                throw new Exception('Password must be at least 7 characters, containing one number/letter/symbol.');
-            }
-        } catch (Exception $e) {
-            echo 'fail2';
-            return false;
-        }
-        return true;
-    }
-
-    public function checkEmail()
-    {
-        try {
-            if ($this->email->isValidEmailAddress() === false) {
-                throw new Exception('Email address is invalid.');
-            }
-            if ($this->email->getEmailExists() === true) {
-                throw new Exception('This email address is already registered with another account.');
-            }
-        } catch (Exception $e) {
-            echo 'fail3';
-            return false;
-        }
-        return true;
-    }
-
-
-    protected function createUser()
-    {
-        if ($this->checkUsername() === true && $this->checkPassword() === true && $this->checkEmail() === true) {
-            $this->database->setTableName('user_accounts');
-            $this->database->setQueryData($this->getNewUser());
-            $this->database->insertMultiple();
-        } else {
-            echo 'fail4';
-        }
+        $this->database->setTableName('user_accounts');
+        $this->database->setQueryData($this->getNewUser());
+        $this->database->insertMultiple();
     }
 
     protected function getNewUser()
@@ -112,7 +66,6 @@ class CreateAccount
         );
     }
 
-    //encrpyt the password
     //check the email is valid, if so send out an email with a conf link
     //create the account
 
