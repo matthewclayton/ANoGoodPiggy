@@ -157,7 +157,7 @@ class Database
 
     public function setNumRows($stmt)
     {
-        $this->numRows = $stmt->num_rows;
+        $this->numRows = $stmt;
     }
 
     public function select()
@@ -172,9 +172,9 @@ class Database
 
         call_user_func_array(array($prepareStmt, 'bind_param'), $this->setBindParms());
 
-        $stmt = $prepareStmt->execute();
-        
-        $this->setNumRows($stmt);
+        $prepareStmt->execute();
+
+        $this->setNumRows($prepareStmt->num_rows);
 
         return $prepareStmt->get_result();
     }
