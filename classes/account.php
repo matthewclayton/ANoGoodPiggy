@@ -19,7 +19,7 @@ class Account
     public function getExists($field, $value)
     {
         $queryArray = array(
-            $field => $value,
+            "$field" => $value,
         );
         $this->database->setTableName('user_accounts');
         $this->database->setQueryData($queryArray);
