@@ -8,7 +8,7 @@
     <b>
         <?php echo 'There were error(s) creating your account!' ?>
     </b>
-    <?php foreach ($errorData AS $errorKey => $errorSource) : ?>
+    <?php foreach ($errorData AS $errorSource => $errorKey) : ?>
         <?php foreach ($errorKey AS $errorNumber => $errorValue) : ?>
             <?php echo $errorSource . ': ' . $errorValue; ?>
             <br>
