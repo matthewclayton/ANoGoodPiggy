@@ -15,7 +15,7 @@ class CsrfToken extends Session
 
     public function __construct()
     {
-        parent::construct();
+        parent::__construct();
         $this->setUserToken();
     }
 
