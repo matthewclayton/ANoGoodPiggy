@@ -28,12 +28,12 @@ class EmailAddress extends Account
 
     protected function validEmailFormat()
     {
-        return filter_var($this->emailAddress, FILTER_VALIDATE_EMAIL);
+        return filter_var($this->getEmailAddress(), FILTER_VALIDATE_EMAIL);
     }
 
     protected function getDomain()
     {
-        return substr(strrchr($this->emailAddress, '@'), 1);
+        return substr(strrchr($this->getEmailAddress(), '@'), 1);
     }
 
     protected function validEmailDomain()
@@ -43,7 +43,7 @@ class EmailAddress extends Account
 
     public function getEmailExists()
     {
-        return parent::getExists('email_address', $this->emailAddress) === true;
+        return parent::getExists('email_address', $this->getEmailAddress()) === true;
     }
 
     protected function setEmailErrors()
