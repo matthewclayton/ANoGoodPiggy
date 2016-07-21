@@ -14,7 +14,7 @@ class ErrorHandler
 
     public function logError($errorSource = self::DEFAULT_SOURCE, $error)
     {
-        echo $erro . '<br>';
+        echo $error . '<br>';
         $this->error[$errorSource] = $error;
     }
 
