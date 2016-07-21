@@ -29,28 +29,24 @@ class Password extends Account
         return $this->userPassword;
     }
 
-    protected function getUserPasswordConfirm()
+    protected function getPasswordConfirm()
     {
         return $this->userPasswordConfirm;
     }
 
     protected function isValidLength()
     {
-        return (strlen($this->getUserPassword()) >= 7);
+        return strlen($this->getPassword()) >= 7;
     }
 
     protected function isMixedCharacters()
     {
-        return (ctype_alpha($this->getUserPassword()) !== true && ctype_digit($this->getUserPassword()) !== true);
+        return ctype_alpha($this->getPassword()) !== true && ctype_digit($this->getPassword()) !== true;
     }
 
     public function isMatching()
     {
-        if ($this->getUserPassword() === $this->getUserPasswordConfirm()) {
-            return true;
-        } else {
-            return false;
-        }
+        return $this->getPassword() === $this->getPasswordConfirm();
     }
 
     protected function setPasswordErrors()
