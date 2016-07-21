@@ -11,9 +11,31 @@ class CsrfToken extends Session
 
     protected $token;
 
+    protected $userToken;
+
+    public function __construct()
+    {
+        $this->setUserToken();
+    }
+
+    protected function getUserToken()
+    {
+        return $this->userToken;
+    }
+
+    protected function setUserToken()
+    {
+        $this->userToken = $_POST['token'];
+    }
+
     public function generateToken()
     {
         $this->token = bin2hex(mcrypt_create_iv(32, MCRYPT_DEV_URANDOM));
+    }
+
+    protected function getSessionToken()
+    {
+        return $_SESSION['token'];
     }
 
     public function getToken()
@@ -28,7 +50,7 @@ class CsrfToken extends Session
 
     public function compareToken()
     {
-        return hash_equals($_POST['token'], $_SESSION['token']);
+        return hash_equals($this->getUserToken(), $this->getSessionToken());
     }
 
 }
