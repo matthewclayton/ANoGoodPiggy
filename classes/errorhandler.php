@@ -15,7 +15,7 @@ class ErrorHandler
     public function logError($errorSource = self::DEFAULT_SOURCE, $error)
     {
         echo $error . '<br>';
-        $this->error[$errorSource] = $error;
+        $this->error[$errorSource][] = $error;
     }
 
     public function hasError($errorSource = self::DEFAULT_SOURCE)
@@ -28,10 +28,4 @@ class ErrorHandler
         return $this->error;
     }
 
-    /**public function getErrorBySource($errorSource = self::DEFAULT_SOURCE)
-    {
-        foreach ($this->error AS $errorKey => $errorValue) {
-            if ($errorKey === $errorSource);
-        }
-    }**/
 }
