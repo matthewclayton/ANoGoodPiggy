@@ -10,16 +10,16 @@ set_include_path('./classes');
 spl_autoload_register();
 
 $database  = new Database();
-$csrfToken = new CsrfToken();
 $error     = new ErrorHandler();
+$csrfToken = new CsrfToken($error);
 
-if ($csrfToken->compareToken() === true) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $username      = new Username($database, $error);
     $password      = new Password($database, $error);
     $email         = new EmailAddress($database, $error);
     $passwordCrypt = new PasswordCrypt($_POST['user_password']);
     $createAccount = new CreateAccount($database, $username, $password, $email, $passwordCrypt, $error);
-    if ($createAccount->isUserValid() === true) {
+    if ($createAccount->isUserValid() === true && $csrfToken->compareToken() === true) {
         $createAccount->saveUser();
     } else {
         $errorData = $error->getError();
