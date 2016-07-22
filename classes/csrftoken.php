@@ -38,7 +38,11 @@ class CsrfToken extends Session
 
     protected function getSessionToken()
     {
-        return $_SESSION['token'];
+        if (isset($_SESSION['token']) === true) {
+            return $_SESSION['token'];
+        } else {
+            return null;
+        }
     }
 
     public function getToken()
