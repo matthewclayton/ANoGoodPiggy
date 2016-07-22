@@ -14,6 +14,8 @@
 class Username extends Account
 {
 
+    const MIN_USERNAME_LENGTH = 3;
+
     protected $username;
 
     protected $error;
@@ -36,9 +38,14 @@ class Username extends Account
         return parent::getExists('username', $this->getUsername()) === true;
     }
 
+    protected function getMinUsernameLength()
+    {
+        return self::MIN_USERNAME_LENGTH;
+    }
+
     protected function isValidLength()
     {
-        return strlen($this->getUsername()) >= 3;
+        return strlen($this->getUsername()) >= $this->getMinUsernameLength();
     }
 
     protected function isValidCharacters()

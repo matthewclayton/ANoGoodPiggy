@@ -67,7 +67,6 @@ class CreateAccount
     }
 
     //check the email is valid, if so send out an email with a conf link
-    //create the account
 
 }
 

@@ -9,6 +9,8 @@
 class Password extends Account
 {
 
+    const MIN_PASSWORD_LENGTH = 7;
+
     protected $error;
 
     protected $userPassword;
@@ -34,9 +36,14 @@ class Password extends Account
         return $this->userPasswordConfirm;
     }
 
+    protected function getMinPassLength()
+    {
+        return self::MIN_PASSWORD_LENGTH;
+    }
+
     protected function isValidLength()
     {
-        return strlen($this->getPassword()) >= 7;
+        return strlen($this->getPassword()) >= $this->getMinPassLength();
     }
 
     protected function isMixedCharacters()
