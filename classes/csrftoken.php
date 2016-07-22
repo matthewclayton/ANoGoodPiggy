@@ -15,7 +15,7 @@ class CsrfToken extends Session
 
     protected $error;
 
-    public function __construct(Error $error)
+    public function __construct(ErrorHandler $error)
     {
         parent::__construct();
         $this->error = $error;
