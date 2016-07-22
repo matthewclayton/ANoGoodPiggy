@@ -49,7 +49,7 @@ class CreateAccount
     {
         $this->database->setTableName('user_accounts');
         $this->database->setQueryData($this->getNewUser());
-        $this->database->insertMultiple();
+        $this->database->insert();
     }
 
     protected function getNewUser()
