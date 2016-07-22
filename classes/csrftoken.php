@@ -57,7 +57,7 @@ class CsrfToken extends Session
 
     public function compareToken()
     {
-        if ($this->getSessionToken() !== null) {
+        if ($this->getUserToken() !== null) {
             hash_equals($this->getUserToken(), $this->getSessionToken());
         }
     }
