@@ -58,7 +58,7 @@ class CsrfToken extends Session
     {
         if ($this->getUserToken() !== null) {
             if (hash_equals($this->getUserToken(), $this->getSessionToken()) !== true) {
-                $this->error->logError('Unknown error, please refresh and try again');
+                $this->error->logError('', 'Unknown error, please refresh and try again');
                 return false;
             } else {
                 return true;
