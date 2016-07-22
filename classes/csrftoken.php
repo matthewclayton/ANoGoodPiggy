@@ -16,7 +16,7 @@ class CsrfToken extends Session
     public function __construct()
     {
         parent::__construct();
-        if (isset($_POST['token']) === true) {
+        if (isset($_POST['token']) !== null) {
             $this->setUserToken();
         }
     }
@@ -38,11 +38,7 @@ class CsrfToken extends Session
 
     protected function getSessionToken()
     {
-        if (isset($_SESSION['token']) === true) {
-            return $_SESSION['token'];
-        } else {
-            return null;
-        }
+        return $_SESSION['token'];
     }
 
     public function getToken()
@@ -57,9 +53,7 @@ class CsrfToken extends Session
 
     public function compareToken()
     {
-        if ($this->getUserToken() !== null) {
-            hash_equals($this->getUserToken(), $this->getSessionToken());
-        }
+        hash_equals($this->getUserToken(), $this->getSessionToken());
     }
 
 }
