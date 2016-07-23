@@ -61,7 +61,7 @@ class Authorize
         return $this->authorizeArray;
     }
 
-    protected function isValidCredentials()
+    public function isValidCredentials()
     {
         $this->database->setTableName('user_accounts');
         $this->database->setQueryData($this->getAuthorizeArray());

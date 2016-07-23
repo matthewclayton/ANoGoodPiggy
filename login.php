@@ -15,6 +15,9 @@ $csrfToken = new CsrfToken($error);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $authorize = new Authorize($database);
+    if ($authorize->isValidCredentials() === true) {
+        echo 'Success!';
+    }
 
 } else {
     $csrfToken->generateToken();
