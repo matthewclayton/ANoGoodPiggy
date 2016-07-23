@@ -44,9 +44,14 @@ class PasswordCrypt
         return $this->hashOptions;
     }
 
+    protected function getPasswordText()
+    {
+        return $this->passwordText;
+    }
+
     protected function setHash()
     {
-        $this->passwordHash = password_hash($this->passwordText, PASSWORD_BCRYPT, $this->getHashOptions());
+        $this->passwordHash = password_hash($this->getPasswordText(), PASSWORD_BCRYPT, $this->getHashOptions());
     }
 
     public function getHash()

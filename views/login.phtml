@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<body>
+<title> Login </title>
+<p> Login </p>
+
+<?php if (isset($errorData) === true) : ?>
+    <b>
+        <?php echo 'There were error(s) logging into your account!' ?>
+    </b>
+    <br>
+    <?php foreach ($errorData AS $errorSource => $errorKey) : ?>
+        <?php foreach ($errorKey AS $errorNumber => $errorValue) : ?>
+            <?php echo $errorSource . ': ' . $errorValue; ?>
+            <br>
+        <?php endforeach; ?>
+    <?php endforeach; ?>
+<?php endif; ?>
+
+
+<form action="login.php" method="POST">
+    Username<input type="text" name="username" value="New User">
+    <br>
+    Password<input type="password" name="user_password" value="">
+    <br>
+    <input type="hidden" name="token" value="<?php echo $csrfToken->getToken(); ?>">
+    <input type="submit" value="Submit">
+</form>
+
+
+</body>
+</html>
